@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Registration Form</title>
+        <style>
+            .whole{
+                padding :50px;
+                background-color:black;
+            }
+            .container {  
+                padding: 50px;  
+                background-color: white;
+                height:600px;
+                width:700px;
+                margin-left:auto;
+                margin-right:auto; 
+                border-radius:80px; 
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }  
+            .head{
+                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                color:palevioletred;
+            }
+            label{
+                font-weight:800px;
+            }
+            .ph{
+                height: 35px;
+                width: 30vw;
+                padding:  5px;
+            }
+            .submit-button {
+                background:#0b73b0;
+                color: white;
+                border-style: outset;
+                border-color: black;
+                height: 40px;
+                width: 150px;
+                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
+                border-radius:20px;
+            }
+            .submit-button:hover {
+                background: rgb(66, 247, 66);
+                color: #fff;
+                border: 1px solid #eee;
+                border-radius: 20px;
+                box-shadow: 5px 5px 5px #eee;
+                text-shadow: none;
+            }
+            .box{
+                padding: 50px;  
+                background-color: white;
+                height:200px;
+                width:700px;
+                margin-left: auto;
+                margin-right:auto; 
+                border-radius:80px;
+                margin-top:50px;
+            }
+            th{
+                padding: 5px;
+            }
+            .a,.b,.c,.d{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;   
+                align-items:center;
+                width:700px; 
+            }
+            #name,#email,#password,#date_of_birth{
+                height:40px;
+                width:250px;
+                border-radius:10px;
+            }
+            
+        </style>
+    </head>
+    <body class="whole">
+        <form id="form" action="/">  
+            <div class="container">  
+            <center>  <h1 class="head"> Registration Form </h1> </center>  
+            <hr>
+            <div class="a">
+                <label>NAME</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text"  id="name" placeholder= "Enter Your Name"  required value=""><br><br>
+            </div>
+            <div class="b">
+                <label>E-MAIL</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="email"  id="email"  placeholder= "Enter Your E-mail"  required value=""><br><br> 
+            </div>
+            <div class="c">
+                <label>PASSWORD</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="password"  id="password" placeholder= "Enter Your Password" required value=""><br><br>   
+            </div>
+            <div class="d">
+                <label>DATE-OF-BIRTH</label>&nbsp;&nbsp;&nbsp;
+                <input type="date" id="date_of_birth"   required value="" min="1980-04-30" max="2005-04-30"><br><br> 
+            </div>
+            <div > 
+                <input type="checkbox"  id="check" required />Accept Terms And Conditions
+                <br><br>
+            </div>
+            <div class="e">
+                <button onclick="result()" class="submit-button" id="Submit">Submit</button>
+            </div>
+            </div>
+        </form>  
+
+       
+        <div class="box" >
+            <center>  <h1 class="head"> Entries </h1> </center> 
+            <table style="width:100%" id="table" border="3">
+                <tr>
+                  <th>NAME</th>
+                  <th>E-MAIL</th>
+                  <th>PASSWORD</th>
+                  <th>DOB</th>
+                  <th>ACCEPTED TERMS?</th>
+                </tr>
+            </table>
+        </div>
+        <script type="text/javascript">
+            var form = document.getElementById('form');
+            var tableBody = document.querySelector('#table tbody');
+            form.addEventListener('submit',function(event){
+            event.preventDefault();
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var date_of_birth = document.getElementById('date_of_birth').value;
+            var checkbox = document.getElementById('check').checked;
+            localStorage.setItem("Name",name);
+            localStorage.setItem("Email", email);
+            localStorage.setItem("Password", password);
+            localStorage.setItem("Date of Birth", date_of_birth);
+            localStorage.setItem("Accept terms?", checkbox);
+            var newRow = document.createElement('tr');
+            newRow.innerHTML = `
+            <td>${name}</td>
+            <td>${email}</td>
+            <td>${password}</td>
+            <td>${date_of_birth}</td>
+            <td>${check ? 'Yes' : 'No'}</td>`;
+            tableBody.appendChild(newRow);
+            form.reset();
+            });
+        </script>    
+    </body>
+</html>
